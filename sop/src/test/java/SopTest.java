@@ -26,4 +26,11 @@ public class SopTest {
 
         assertEquals(0, tester.sum(0, 0));
     }
+
+    @Test
+    public void sumOfZeroesShouldNotReturnOne() {
+        SumClass tester = new SumClass();
+
+        assertNotEquals(1, tester.sum(0, 0));
+    }
 }
