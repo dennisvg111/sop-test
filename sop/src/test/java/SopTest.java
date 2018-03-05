@@ -18,6 +18,12 @@ public class SopTest {
 
         assertEquals(10, tester.sum(10, 0));
         assertEquals(10, tester.sum(0, 10));
+    }
+
+    @Test
+    public void sumOfZeroesShouldReturnZero() {
+        SumClass tester = new SumClass();
+
         assertEquals(0, tester.sum(0, 0));
     }
 }
