@@ -24,6 +24,6 @@ public class SopTest {
     public void sumOfZeroesShouldReturnZero() {
         SumClass tester = new SumClass();
 
-        asserptEquals(0, tester.sum(0, 0));
+        assertEquals(0, tester.sum(0, 0));
     }
 }
