@@ -20,5 +20,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco</artifactId>
+            <version>0.8.0</version>
+        </dependency>
     </dependencies>
 </project>
