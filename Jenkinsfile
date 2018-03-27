@@ -1,11 +1,33 @@
-node {
-  checkout scm
-  env.PATH = "${tool 'jenkins-maven'}/bin:${env.PATH}"
-  stage('Package Application') {
-    sh 'mvn clean package -DskipTests'
-  }
+pipeline {
+	agent any
 
-  stage('Create Docker Image') {
-    docker.build("sop/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
-  }
+	stages {
+		stage("Build") {
+			steps {
+				sh 'mvn -v'
+			}
+		}
+
+		stage("Testing") {
+			parallel {
+				stage("Unit Tests") {
+					agent { docker 'openjdk:8-jdk-alpine' }
+					steps {
+						sh 'java -version'
+					}
+				}
+				stage("Integration Tests") {
+					steps {
+						sh 'java -version'
+					}
+				}
+			}
+		}
+
+		stage("Deploy") {
+			steps {
+				echo "Deploy!"
+			}
+		}
+	}
 }
