@@ -1,15 +1,7 @@
-pipeline {
-  agent none
-  stages {
-    stage('Maven Install') {
-      agent {
-        docker {
-          image 'maven:3.5.0'
-        }
-      }
-      steps {
-        sh 'mvn clean install'
-      }
-    }
+node {
+  docker.image('maven:3.3.3-jdk-8').inside {
+    git url: "https://github.com/dennisvg111/sop-test.git"
+    sh 'mvn -B clean install'
   }
 }
+
