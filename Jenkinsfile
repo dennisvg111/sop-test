@@ -1,37 +1,15 @@
 pipeline {
-	agent any
-
-    tools {
-      maven 'jenkins-maven'
+  agent none
+  stages {
+    stage('Maven Install') {
+      agent {
+        docker {
+          image 'maven:3.5.0'
+        }
+      }
+      steps {
+        sh 'mvn clean install'
+      }
     }
-
-	stages {
-		stage("Build") {
-			steps {
-				sh 'mvn -v'
-			}
-		}
-
-		stage("Testing") {
-			parallel {
-				stage("Unit Tests") {
-					agent { docker 'openjdk:8-jdk-alpine' }
-					steps {
-						sh 'java -version'
-					}
-				}
-				stage("Integration Tests") {
-					steps {
-						sh 'java -version'
-					}
-				}
-			}
-		}
-
-		stage("Deploy") {
-			steps {
-				echo "Deploy!"
-			}
-		}
-	}
+  }
 }
